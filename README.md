@@ -4,7 +4,7 @@
 * Michael Horton
 * Frank Waters
 * Diana Gandy
-* Stephen Kornajcik
+* Steven Kornajcik
 * Opeyemi Adebayo
 
 ### Outline
