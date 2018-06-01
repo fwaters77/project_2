@@ -1,5 +1,5 @@
 centerOfUS = [39.8283,-98.5795];
-zoomLevel = 5;
+zoomLevel = 2;
 
 var outdoorBaseLayer = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token='+accessToken)
 var map = L.map('map',{
