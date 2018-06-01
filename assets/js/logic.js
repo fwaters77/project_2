@@ -90,10 +90,10 @@ d3.json('/data/custom.geo.json',function(error,data) {
  
             }
         }
-        console.log(_1960Data)
-        console.log(_1970Data)
-        console.log(_1980Data)
-        console.log(_1990Data)
+        // console.log(_1960Data)
+        // console.log(_1970Data)
+        // console.log(_1980Data)
+        // console.log(_1990Data)
 
         _1960Layer = L.choropleth(_1960Data,{
             valueProperty: 'immigrants',
@@ -165,29 +165,51 @@ d3.json('/data/custom.geo.json',function(error,data) {
                     '1980':_1980Layer,
                     '1990':_1990Layer};
         L.control.layers(allLayers).addTo(map)
-        // var legend = L.control({ position: "bottomright" });
-        // legend.onAdd = function() {
-        //     var div = L.DomUtil.create("div", "info legend");
-        //     var limits = geojson.options.limits;
-        //     var colors = geojson.options.colors;
-        //     var labels = [];
-        //     // console.log(limits)
-        //     // Add min & max
-        //     var legendInfo = "<h1>Immigration Volume</h1>" +
-        //     "<div class=\"labels\">" +
-        //         "<div class=\"min\">" + limits[0] + "</div>" +
-        //         "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
-        //     "</div>";
+        var legend = L.control({ position: "bottomright" });
+        legend.onAdd = function() {
+            var div = L.DomUtil.create("div", "info legend");
+            var limits = _1960Layer.options.limits;
+            var colors = _1960Layer.options.colors;
+            var labels = [];
+            // console.log(limits)
+            // Add min & max
+            var legendInfo = "<h1>Immigration Volume</h1>" +
+            "<div class=\"labels\">" +
+                "<div class=\"min\">" + limits[0] + "</div>" +
+                "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+            "</div>";
 
-        //     div.innerHTML = legendInfo;
+            div.innerHTML = legendInfo;
+            div.id = 'legend'
+            limits.forEach(function(limit, index) {
+            labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+            });
 
-        //     limits.forEach(function(limit, index) {
-        //     labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
-        //     });
-
-        //     div.innerHTML += "<ul>" + labels.join("") + "</ul>";
-        //     return div;
-        // };
-        // legend.addTo(map);
+            div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+            return div;
+        };
+        legend.addTo(map);
     })
+})
+
+map.on('baselayerchange',function(e) {
+    // console.log('change')
+    // console.log(e)
+    let div = L.DomUtil.get('legend')
+    let limits = allLayers[e.name].options.limits;
+    let colors = allLayers[e.name].options.colors;
+    let labels = [];
+
+    let legendInfo = "<h1>Immigration Volume</h1>" +
+        "<div class=\"labels\">" +
+        "<div class=\"min\">" + limits[0] + "</div>" +
+        "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+        "</div>";
+    
+    div.innerHTML = legendInfo;
+    limits.forEach(function(limit, index) {
+        labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+    });
+
+    div.innerHTML += "<ul>" + labels.join("") + "</ul>";
 })
