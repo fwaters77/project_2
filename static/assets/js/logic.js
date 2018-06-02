@@ -15,10 +15,10 @@ var allLayers = {};
 
 var feature = [];
 
-d3.json('/data/custom.geo.json',function(error,data) {
+d3.json('/get_map_data',function(error,data) {
     if(error){console.warn(error)};
 
-    d3.json('/data/immigration_by_country.JSON',function(error,cdata) {
+    d3.json('/get_immigration_data',function(error,cdata) {
         if(error){console.warn(error)};
         // console.log(cdata);
         // console.log(cdata['1960'])
