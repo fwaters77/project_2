@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>I frame test window</title>
+    <title>Immigration Trends</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/bootstrap.min.css') }}">
 </head>
 <body>
+    <div class='jumbotron' style='text-align:center'    >
+            <h1>Immigration Trends by Decade, and State</h1>
+    </div>
+    <iframe src="{{ url_for('static',filename='choropleth.html') }}" frameborder="0" style='width:100%; height:5in;'></iframe>
+    <iframe src="{{ url_for('static',filename='refugee/index.html') }}" frameborder="4" style='width:80%;margin-left:auto;margin-right:auto;height:6in;display:block'></iframe>
+    <iframe src="{{ url_for('static',filename='bubble.html') }}" frameborder="4" style='width:80%;margin-left:auto;margin-right:auto;height:6in;display:block'></iframe>
 
-    <iframe src="{{ url_for('static',filename='choropleth.html') }}" frameborder="0" style='width:600px;height:400px'></iframe>
-    <iframe src="{{ url_for('static',filename='refugee/index.html') }}" frameborder="0" style='width:600px;height:400px'></iframe>
     
 </body>
 </html>
